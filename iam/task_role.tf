@@ -23,10 +23,7 @@ data "aws_iam_policy_document" "TaskRolePolicy" {
       "logs:CreateLogStream",
       "logs:PutLogEvents"
     ]
-    resources = [
-      aws_cloudwatch_log_group.git_diff_log_group.arn,
-      "${aws_cloudwatch_log_group.git_diff_log_group.arn}:*"
-    ]
+    resources = ["${aws_cloudwatch_log_group.git_diff_log_group.arn}:*"]
   }
 
   statement {
