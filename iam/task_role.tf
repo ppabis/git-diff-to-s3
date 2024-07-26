@@ -33,7 +33,7 @@ data "aws_iam_policy_document" "TaskRolePolicy" {
       "ssm:PutParameter",
       "ssm:DeleteParameter"
     ]
-    resources = ["arn:aws:ssm:eu-west-1:${data.aws_caller_identity.me.account_id}:parameter/git-diff/*"]
+    resources = ["arn:aws:ssm:*:${data.aws_caller_identity.me.account_id}:parameter/git-diff/*"]
   }
 
   statement {
