@@ -18,7 +18,7 @@ resource "null_resource" "docker_push" {
   }
 
   provisioner "local-exec" {
-    command = "aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin ${aws_ecr_repository.ecr_image.repository_url}"
+    command = "aws ecr get-login-password --region ${var.region} | docker login --username AWS --password-stdin ${aws_ecr_repository.ecr_image.repository_url}"
   }
 
   provisioner "local-exec" {
@@ -26,12 +26,4 @@ resource "null_resource" "docker_push" {
   }
 
   provider = null0
-}
-
-output "repository" {
-  value = aws_ecr_repository.ecr_image.repository_url
-}
-
-output "repository_arn" {
-  value = aws_ecr_repository.ecr_image.arn
 }
