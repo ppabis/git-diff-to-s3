@@ -16,7 +16,8 @@ resource "aws_ecs_task_definition" "GitDiffTask" {
       {
         image          = "${module.ecr.repository}:latest",
         results_bucket = aws_s3_bucket.results_bucket.bucket,
-        log_group      = module.iam.log_group_name
+        log_group      = module.iam.log_group_name,
+        region         = var.region
       }
     )
   ))

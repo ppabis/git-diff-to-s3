@@ -4,6 +4,7 @@ module "vpc" {
 
 module "ecr" {
   source = "./ecr"
+  region = var.region
 }
 
 module "iam" {

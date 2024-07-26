@@ -5,5 +5,5 @@
     logDriver: "awslogs"
     options:
       awslogs-group: "${log_group}"
-      awslogs-region: "eu-west-1"
+      awslogs-region: "${region}"
       awslogs-stream-prefix: "diff"
