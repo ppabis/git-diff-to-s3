@@ -1,3 +1,11 @@
+Daily Git diff in S3
+===================
+This projects schedules a daily run of ECS task that clones a Git repository and
+performs a diff between current HEAD and last run. The diff is then stored in S3
+bucket and last commit processed (so current HEAD) in SSM Parameter Store.
+
+This project by default creates a CodeCommit repository but it shouldn't be
+difficult to modify it or add more repositories with several schedules.
 
 ## Applying the infrastructure
 First edit all the variables that you need and set a region.
