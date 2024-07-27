@@ -5,7 +5,8 @@ resource "random_string" "suffix" {
 }
 
 resource "aws_s3_bucket" "results_bucket" {
-  bucket = "git-diff-results-bucket-${random_string.suffix.result}"
+  bucket        = "git-diff-results-bucket-${random_string.suffix.result}"
+  force_destroy = true
 }
 
 data "aws_iam_policy_document" "allow_task_role_put" {
