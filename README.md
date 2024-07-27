@@ -30,9 +30,9 @@ aws ecs run-task \
         {
             "name": "git",
             "environment": [
-                {"name": "GIT_REPO", "value": "'$(tofu output -raw repo_name)'"},
+                {"name": "GIT_REPO", "value": "'$($TERRAFORM_BINARY output -raw repo_name)'"},
                 {"name": "PARAMETER_NAME", "value": "/git-diff/repo-123"},
-                {"name": "RESULTS_BUCKET", "value": "'$(tofu output -raw bucket_name)'/reporesults"}
+                {"name": "RESULTS_BUCKET", "value": "'$($TERRAFORM_BINARY output -raw bucket_name)'/reporesults"}
             ]
         }
     ]
