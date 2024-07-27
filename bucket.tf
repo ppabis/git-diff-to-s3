@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "results_bucket" {
 data "aws_iam_policy_document" "allow_task_role_put" {
   statement {
     sid       = "putobject"
-    actions   = ["s3:PutObject", "s3:GetObject"]
+    actions   = ["s3:PutObject"]
     resources = ["${aws_s3_bucket.results_bucket.arn}/*"]
     principals {
       type        = "AWS"
