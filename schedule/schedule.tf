@@ -29,5 +29,5 @@ resource "aws_scheduler_schedule" "schedule" {
   }
 
   flexible_time_window { mode = "OFF" }
-  schedule_expression = "rate(15 minutes)"
+  schedule_expression = "cron(0 0 * * ? *)" # Run every day at midnight
 }
