@@ -31,9 +31,17 @@ fi
 
 echo "Last commit: $LAST_COMMIT"
 
+### Configure git - if no HTTP credentials were provided, default to IAM authentication
+if [[ -z "$GIT_HTTP_CREDENTIALS"  || "$GIT_HTTP_CREDENTIALS" == "-" ]]; then
+  echo "Authenticating with IAM (CodeCommit only)"
+  git config --global credential.helper '!aws codecommit credential-helper $@'
+  git config --global credential.UseHttpPath true
+else
+  ### Otherwise, use HTTP basic auth
+  echo "Authenticating with HTTP basic auth (GitHub, etc.)"
+  GIT_REPO=$(echo $GIT_REPO | sed -e "s|https://|https://$GIT_HTTP_CREDENTIALS@|")
+fi
 ### Clone and create diff
-git config --global credential.helper '!aws codecommit credential-helper $@'
-git config --global credential.UseHttpPath true
 git clone $GIT_REPO /tmp/repo
 cd /tmp/repo
 git diff $LAST_COMMIT..HEAD > /tmp/changes.diff
