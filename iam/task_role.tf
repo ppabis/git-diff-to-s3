@@ -36,12 +36,15 @@ data "aws_iam_policy_document" "TaskRolePolicy" {
     resources = ["arn:aws:ssm:*:${data.aws_caller_identity.me.account_id}:parameter/git-diff/*"]
   }
 
-  statement {
-    sid = "CodeCommitClone"
-    actions = [
-      "codecommit:GitPull"
-    ]
-    resources = [var.codecommit_repo_arn]
+  dynamic "statement" {
+    for_each = var.codecommit_repo_arn == "" ? [] : ["1"]
+    content {
+      sid = "CodeCommitClone"
+      actions = [
+        "codecommit:GitPull"
+      ]
+      resources = [var.codecommit_repo_arn]
+    }
   }
 }
 
