@@ -8,3 +8,9 @@ variable "region" {
   type        = string
   default     = "eu-west-1"
 }
+
+variable "external_repo_url" {
+  description = "In case we don't want to use CodeCommit, we can use an external repository. It will override and discard repo_name."
+  type        = string
+  default     = ""
+}
