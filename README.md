@@ -54,3 +54,13 @@ executions of this script.
 
 ## What if there are no changes?
 The script will just create an empty file in S3.
+
+## Using external Git repository
+Set variable "external_repo_url" to match Git clone URL without any credentials.
+Then you have to put your `username:password` in SSM Parameter Store.
+
+```bash
+$ read -s GIT_HTTP_BASIC_AUTH_CREDENTIALS # type username:password. It won't be shown
+$ aws ssm put-parameter --name $(tofu output -raw git_http_auth_name) --value "$GIT_HTTP_BASIC_AUTH_CREDENTIALS" --overwrite --region eu-west-1
+$ unset GIT_HTTP_BASIC_AUTH_CREDENTIALS
+```
