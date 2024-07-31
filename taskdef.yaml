@@ -7,3 +7,6 @@
       awslogs-group: "${log_group}"
       awslogs-region: "${region}"
       awslogs-stream-prefix: "diff"
+  secrets:
+    - name: "GIT_HTTP_CREDENTIALS"
+      valueFrom: "${git_http_credentials_arn}"

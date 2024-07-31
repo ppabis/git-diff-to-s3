@@ -14,10 +14,11 @@ resource "aws_ecs_task_definition" "GitDiffTask" {
     templatefile(
       "${path.module}/taskdef.yaml",
       {
-        image          = "${module.ecr.repository}:latest",
-        results_bucket = aws_s3_bucket.results_bucket.bucket,
-        log_group      = module.iam.log_group_name,
-        region         = var.region
+        image                    = "${module.ecr.repository}:latest",
+        results_bucket           = aws_s3_bucket.results_bucket.bucket,
+        log_group                = module.iam.log_group_name,
+        region                   = var.region,
+        git_http_credentials_arn = aws_ssm_parameter.git_http_auth.arn
       }
     )
   ))
