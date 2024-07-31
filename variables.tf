@@ -1,5 +1,5 @@
 variable "repo_name" {
-  description = "The name of the repository"
+  description = "The name of the repository. Is also used for the SSM parameter name so fill this."
   type        = string
 }
 
