@@ -10,7 +10,7 @@ module "schedule" {
   sg_id                       = module.vpc.security_group
   cluster_name                = aws_ecs_cluster.cluster.name
   task_definition_arn_version = aws_ecs_task_definition.GitDiffTask.arn
-  repo_url                    = aws_codecommit_repository.CodeCommitRepo.clone_url_http
+  repo_url                    = var.external_repo_url == "" ? aws_codecommit_repository.CodeCommitRepo[0].clone_url_http : var.external_repo_url
   bucket_name                 = "${aws_s3_bucket.results_bucket.bucket}/${var.repo_name}"
   parameter_name              = "/git-diff/${var.repo_name}"
 }
