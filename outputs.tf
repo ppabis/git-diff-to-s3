@@ -13,7 +13,7 @@ output "sg_id" {
 }
 
 output "repo_name" {
-  value = aws_codecommit_repository.CodeCommitRepo.clone_url_http
+  value = var.external_repo_url == "" ? aws_codecommit_repository.CodeCommitRepo[0].clone_url_http : var.external_repo_url
 }
 
 output "bucket_name" {
