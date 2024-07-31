@@ -1,5 +1,5 @@
 resource "aws_scheduler_schedule" "schedule" {
-
+  name = "GitDiffSchedule"
   target {
     arn      = "arn:aws:scheduler:::aws-sdk:ecs:runTask"
     role_arn = aws_iam_role.ScheduleRole.arn
