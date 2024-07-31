@@ -45,6 +45,12 @@ data "aws_iam_policy_document" "ExecutionRolePolicy" {
     resources = [var.ecr_repository_arn]
   }
 
+  statement {
+    sid       = "GetSecret"
+    actions   = ["ssm:GetParameters"]
+    resources = [var.git_auth_parameter_arn]
+  }
+
 }
 
 resource "aws_iam_role_policy" "ExecutionRolePolicy" {
